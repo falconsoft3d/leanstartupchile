@@ -1,0 +1,131 @@
+{% extends 'home_base.html' %}
+{% block headTitle %}
+    <title>Contact Us</title>
+{% endblock %}
+{% block bodyTagWithClass %}
+<body class="body-bg-white">
+{% endblock %}
+
+{% block header-spacer %}
+<div class="header-spacer header-spacer-small"></div>
+{% endblock %}
+
+{% block loggedbody %}
+{% load static %}
+
+    <style>
+        .form-group .help-block {
+            display: none;
+        }
+        .form-group.has-error .help-block {
+            display: block;
+        }
+        input[name='decoy'],
+        p.decoy {
+            display: none !important;
+        }
+
+    </style>
+
+
+<section class="medium-padding120 bg-body contact-form-animation scrollme">
+	<div class="container">
+		<div class="row">
+			<div class="col col-xl-10 col-lg-10 col-md-12 col-sm-12  m-auto">
+
+
+				<!-- Contacts Form -->
+
+				<div class="contact-form-wrap">
+					<div class="contact-form-thumb">
+						<h2 class="title">SEND US <span>A RAVEN</span></h2>
+						<p>Do you have general questions about Olympus Social Network? Send us a raven and we’ll answer you as fast as we can!</p>
+						<img src="{% static 'img/crew.png' %}" alt="crew" class="crew">
+					</div>
+					<form class="contact-form" action="." method="post" name="feedback">
+                        {% csrf_token %}
+						<div class="row">
+							<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+                                <div class="form-group label-floating {% if form.name.errors %}has-error{% endif %}">
+                                    <label for="name" class="control-label">Name</label>
+
+                                    <input type="text" name="name" class="form-control"
+                                    value="{% if form.data.name %}{{form.data.name}}{% else %}{{form.initial.name}}{% endif %}" />
+                                    <p class="help-block">Name is a required field</p>
+
+                                </div>
+							</div>
+
+							<div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+
+                                <div class="form-group label-floating {% if form.email.errors %}has-error{% endif %}">
+                                    <label for="email" class=" control-label">E-mail Address</label>
+                                    <input class="form-control" type="email" name="email"
+                                         value="{% if form.data.email %}{{form.data.email}}{% else %}{{form.initial.email}}{% endif %}" />
+
+                                        <p class="help-block">A valid e-mail address is required.</p>
+
+                                </div>
+
+
+                                <div class="form-group label-floating {% if form.subject.errors %}has-error{% endif %}">
+                                    <label for="subject"  class="control-label">Subject</label>
+
+                                        {{form.subject}}
+                                        <p class="help-block">Subject is a required field.</p>
+
+                                </div>
+                                <div class="form-group label-floating is-empty {% if form.description.errors %}has-error{% endif %}">
+                                    <label for="description" class="control-label">Description</label>
+
+                                        {{form.description}}
+                                        <p class="help-block">Description is a required field.</p>
+
+                                </div>
+
+                                <div class="form-group label-floating is-empty {% if form.decoy.errors %}has-error{% endif %}">
+                                    <input type="text" name="decoy" value="" placeholder="Please leave blank" autofill="off" />
+                                    <p class="help-block decoy">If you can see the decoy field, please leave it blank.</p>
+                                </div>
+
+                                <div class="row">
+
+
+								<button class="btn btn-purple btn-lg full-width" type="submit">Send Message</button>
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<!-- ... end Contacts Form -->
+
+			</div>
+		</div>
+	</div>
+
+	<div class="half-height-bg bg-white"></div>
+</section>
+
+
+<!-- Section Call To Action Animation -->
+
+<section class="align-right pt160 pb80 section-move-bg call-to-action-animation scrollme">
+	<div class="container">
+		<div class="row">
+			<div class="col col-xl-10 m-auto col-lg-10 col-md-12 col-sm-12 col-12">
+{#				<a href="#" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#registration-login-form-popup">Start Making Friends Now!</a>#}
+			</div>
+		</div>
+	</div>
+	<img class="first-img" alt="guy" src="{% static 'img/guy.png' %}">
+	<img class="second-img" alt="rocket" src="{% static 'img/rocket1.png' %}">
+	<div class="content-bg-wrap bg-section1"></div>
+</section>
+
+<!-- ... end Section Call To Action Animation -->
+
+
+
+{% endblock %}
+

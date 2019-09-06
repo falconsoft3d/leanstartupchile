@@ -1,0 +1,53 @@
+{% load label_tag_attr %}
+{% load widget_tweaks %}
+
+{% for hidden_field in form.hidden_fields %}
+  {{ hidden_field }}
+{% endfor %}
+
+{% for field in form.visible_fields %}
+
+{% if field is form.username %}
+        <div class="form-group">
+
+            {% if form.is_bound %}
+              {% if field.errors %}
+                {% render_field field class="form-control form-control-sm" placeholder="Username" %}
+                {% for error in field.errors %}
+                  <div class="invalid-feedback">
+                    {{ error }}
+                  </div>
+                {% endfor %}
+              {% else %}
+                {% render_field field class="form-control form-control-sm is-valid" placeholder="Username" %}
+              {% endif %}
+            {% else %}
+              {% render_field field class="form-control form-control-sm" placeholder="Username" %}
+            {% endif %}
+
+        </div>
+{% else %}
+ <div class="form-group">
+
+            {% if form.is_bound %}
+              {% if field.errors %}
+                {% render_field field class="form-control form-control-sm" placeholder="Password" %}
+                {% for error in field.errors %}
+                  <div class="invalid-feedback">
+                    {{ error }}
+                  </div>
+                {% endfor %}
+              {% else %}
+                {% render_field field class="form-control form-control-sm is-valid" placeholder="Password" %}
+              {% endif %}
+            {% else %}
+              {% render_field field class="form-control form-control-sm" placeholder="Password" %}
+            {% endif %}
+
+        </div>
+{% endif %}
+
+{% endfor %}
+
+<button class="btn btn-primary btn-md-2">Login</button>
+

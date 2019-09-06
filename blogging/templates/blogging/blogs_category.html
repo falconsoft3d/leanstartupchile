@@ -1,0 +1,141 @@
+{% extends 'home_base.html' %}
+{% block headTitle %}
+    <title>Blog Page</title>
+{% endblock %}
+
+{% block loggedbody %}
+{% load static %}
+<div class="container">
+
+    <div class="row">
+
+		<div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+			<div class="clients-grid">
+
+				<ul class="cat-list-bg-style align-center sorting-menu" style="margin-top:0px!important;">
+					<li class="cat-list__item" ><a href="{% url 'blogging:blogging' %}" >ALL CATEGORIES
+{#                        <div class="items-round-little bg-blue-light" style="float:right!important;">{{ blog_total }}</div>#}
+                    </a></li>
+                    {% for category in categorys %}
+                        <li class="cat-list__item
+                            {% if now_category == category %}
+                            active
+                            {% endif %}
+                            "
+                            >
+                            <a href="{% url 'blogging:blog-category' category %}" class="">{{ category }}
+{#                            {% if category.blog_set.count > 0 %}#}
+{#                                <div class="items-round-little bg-blue-light" style="float:right!important;">#}
+{#                            {% else %}#}
+{#                                <div class="items-round-little bg-secondary" style="float:right!important;">#}
+{#                            {% endif %}#}
+{#                            {{ category.blog_set.count }}</div>#}
+                            </a></li>
+
+                    {% endfor %}
+
+				</ul>
+
+				<div class="row sorting-container" id="clients-grid-1" data-layout="masonry">
+                     {% for blog in blogs %}
+                         <div class="col col-xl-4 col-lg-4 col-md-6 col-sm-12  sorting-item {{ blog.category }}">
+						<div class="ui-block">
+
+
+							<!-- blog -->
+
+							<article class="hentry blog-post">
+
+								<div class="post-thumb">
+                                    <a href="{% url 'blogging:blog-detail' blog.id %}"><img src="{{ MEDIA_URL }}{{blog.image.url}}" alt="post" /></a>
+								</div>
+
+								<div class="post-content">
+									<a href="#" class="post-category bg-transparent">{{ blog.category }}</a>
+									<a href="{% url 'blogging:blog-detail' blog.id %}" class="h4 post-title">{{ blog.title }} </a>
+									<p>{{ blog.text|truncatewords:50 }}
+									</p>
+
+									<div class="author-date not-uppercase">
+										<div class="post__date">
+											<time class="published" datetime="2017-03-24T18:18">
+												{{blog.created|timesince}} by
+											</time>
+										</div>
+										<a class="h6 post__author-name fn" href="#">  {{blog.author.user.get_full_name}}</a>
+									</div>
+								</div>
+
+							</article>
+
+							<!-- ... end Post -->
+						</div>
+					    </div>
+
+                     {% endfor %}
+
+				</div>
+			</div>
+		</div>
+	</div>
+{% if current_user.is_authenticated  %}
+   {% if is_member %}
+        <a class="create-blog" style="bottom:80px!important;background-color: #38a9ff!important;" href="{% url 'blogging:blog-create' %}" data-toggle="tooltip" data-placement="top"   data-original-title="Post blog">
+           <svg class="olymp-plus-icon left-menu-icon back-icon" style="margin-top:14px!important;" ><use xlink:href="{% static 'svg-icons/sprites/icons.svg' %}#olymp-plus-icon"></use></svg>
+        </a>
+{% endif %}
+{% endif %}
+    <!-- Pagination -->
+
+{% if is_paginated %}
+	<nav aria-label="Page navigation">
+		<ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a href="?page={{ page_obj.previous_page_number }}" class="page-link" tabindex="-1">Previous</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+            {% endif %}
+            {% for i in paginator.page_range %}
+                {% if page_obj.number == i %}
+                    <li class="page-item active"><a class="page-link" href="#">{{ i }}<div class="ripple-container"><div class="ripple ripple-on ripple-out" style="left: -10.3833px; top: -16.8333px; background-color: rgb(255, 255, 255); transform: scale(16.7857);"></div></div></a></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}<div class="ripple-container"><div class="ripple ripple-on ripple-out" style="left: -10.3833px; top: -16.8333px; background-color: rgb(255, 255, 255); transform: scale(16.7857);"></div></div></a></li>
+
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a href="?page={{ page_obj.next_page_number }}" class="page-link" tabindex="-1">Next</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Next</a>
+                </li>
+            {% endif %}
+
+		</ul>
+	</nav>
+{% endif %}
+	<!-- ... end Pagination -->
+
+{# creating new blog #}
+{#    <div class="col-md-8">#}
+{#        <h2>Blogs</h2>#}
+{#        <form method="post" enctype="multipart/form-data">#}
+{#            {% csrf_token %}#}
+{#            {{ form }}#}
+{#            <br>#}
+{#            <button type="submit">Submit</button>#}
+{#        </form>#}
+{#        <h2>{{ text }}</h2>#}
+{#        #}
+{#    </div>#}
+
+</div>
+
+
+{% endblock %}

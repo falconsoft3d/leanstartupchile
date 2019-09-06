@@ -1,0 +1,266 @@
+{% extends 'home_base.html' %}
+{% block headTitle %}
+    <title>Home Page</title>
+{% endblock %}
+
+{% block loggedbody %}
+{% load static %}
+
+
+<div id="content" class="container" >
+
+
+    <div class="page-description">
+				<div class="icon">
+					<svg class="olymp-star-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="FAV PAGE"><use xlink:href="svg-icons/sprites/icons.svg#olymp-star-icon"></use></svg>
+				</div>
+				<span>Here you’ll see the posts of {{ owner.username }}</span>
+			</div>
+    <div class="row">
+
+         {% if photos %}
+            {% for photo in photos reversed%}
+        <div class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-sm-12 col-12">
+
+            <!-- Post -->
+            <div class="ui-block">
+            <article class="hentry post has-post-thumbnail">
+
+                <div class="post__author author vcard inline-items">
+                    {% if photo.owner.member.image.url %}
+                            <img
+                                src="{{ MEDIA_URL }}{{photo.owner.member.image.url}}"
+                                alt="avatar"
+                                class="img-avatar img-thumbnail">
+                        {% else %}
+                            <img
+                                src="{% static "instaapp/img/profile-picture-placeholder.png" %}"
+                                alt="dp"
+                                class="img-avatar img-thumbnail">
+                        {% endif %}
+
+
+                    <div class="author-date">
+                        <a class="h6 post__author-name fn" >{{photo.owner.username}}</a>
+                        <div class="post__date">
+                            <time class="published" datetime="2017-03-24T18:18">
+                                {{photo.created|timesince}}
+                            </time>
+                        </div>
+                    </div>
+
+                </div>
+
+                <p>{{photo.caption}}</p>
+
+                <div class="post-thumb">
+                    <img src="{{ MEDIA_URL }}{{photo.image.url}}" alt="post" />
+
+                </div>
+                <div class="post-additional-info inline-items">
+
+
+                <a href="#" class="post-add-icon inline-items">
+                    {% if current_user.is_authenticated  %}
+                            {% if is_member %}
+
+                            <svg
+                                data-pid="{{photo.id}}"
+                                data-url="{% url 'accounts:like_photo' %}"
+                                {% if photo.pk in liked_photos %}
+                                    class="like-button liked_photo olymp-heart-icon"
+                                {% else %}
+                                    class="like-button olymp-heart-icon"
+                                {% endif %}
+                                >
+                                <use xlink:href="{% static 'svg-icons/sprites/icons.svg' %}#olymp-heart-icon"></use>
+                            </svg>
+                            <span {% if photo.pk in liked_photos %}
+                                    class="liked_photo"
+
+                                {% endif %}>{{photo.like_set.all.count}} Likes </span>
+
+                                {% else%}
+
+                            <svg
+
+                                    class="like-button olymp-heart-icon"
+
+                                >
+                                <use xlink:href="{% static 'svg-icons/sprites/icons.svg' %}#olymp-heart-icon"></use>
+                            </svg>
+                            <span >{{photo.like_set.all.count}} Likes </span>
+                                {% endif %}
+                        {% else %}
+
+                            <svg
+
+                                    class="like-button olymp-heart-icon"
+
+                                >
+                                <use xlink:href="{% static 'svg-icons/sprites/icons.svg' %}#olymp-heart-icon"></use>
+                            </svg>
+                            <span >{{photo.like_set.all.count}} Likes </span>
+                        {% endif %}
+
+                 </a>
+
+							<div class="comments-shared">
+								<a href="#" class="post-add-icon inline-items">
+									<svg class="olymp-speech-balloon-icon"><use xlink:href="{% static 'svg-icons/sprites/icons.svg' %}#olymp-speech-balloon-icon"></use></svg>
+									<span>{{ photo.comment_set.all.count }} comments </span>
+								</a>
+
+							</div>
+
+
+						</div>
+
+            </article>
+
+            <!-- ... end Post -->
+
+            <!-- Comments -->
+            <div class="mCustomScrollbar" style="max-height:300px!important;" data-mcs-theme="dark">
+
+                <ul class="comments-list">
+
+                    {% for comment in photo.comment_set.all reversed%}
+                        <li class="comment-item">
+                            <div class="post__author author vcard inline-items">
+                                {% if comment.owner.image.url %}
+                            <img
+                                src="{{ MEDIA_URL }}{{comment.owner.image.url}}"
+                                alt="avatar"
+                                class="img-avatar img-thumbnail">
+                        {% else %}
+                            <img
+                                src="{% static "instaapp/img/profile-picture-placeholder.png" %}"
+                                alt="dp"
+                                class="img-avatar img-thumbnail">
+                        {% endif %}
+
+
+                        <div class="author-date">
+                            <a class="h6 post__author-name fn" >{{ comment.owner }}</a>
+                            <div class="post__date">
+                                <time class="published" datetime="2017-03-24T18:18">
+                                {{comment.created|timesince}}
+                                </time>
+                            </div>
+                        </div>
+
+                        <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="{% static 'svg-icons/sprites/icons.svg' %}#olymp-three-dots-icon"></use></svg></a>
+
+                    </div>
+                            <p>{{ comment.text }}</p>
+
+                        </li>
+                    {% endfor %}
+                </ul>
+					</div>
+
+
+
+{#            <a href="#" class="more-comments">View more comments <span>+</span></a>#}
+
+                <div class="panel-footer" style="background-color:#ffffff;">
+                        {% if current_user.is_authenticated  %}
+                            {% if is_member %}
+                            <div class="input-group input-group-sm">
+
+
+                            {# Comment text box #}
+                            <form
+                                method="post"
+                                action="{% url 'accounts:post_photo_comment' %}"
+                                class="comment-form"
+                                style=" width:100%;"
+                            >
+                            {% csrf_token %}
+                                <input
+                                    type="hidden"
+                                    name="photo_id"
+                                    value="{{photo.id}}" />
+                                <input
+                                    name="comment_text"
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Say something..."
+                                    aria-describedby="sizing-addon3" />
+
+                            </form>
+
+
+                        </div>
+                                {% else%}
+                            <div class="input-group input-group-sm">
+
+                            {# Comment text box #}
+                            <form
+
+                                class="comment-form"
+                                style=" width:100%;"
+                            >
+                            {% csrf_token %}
+                                <input
+                                    type="hidden"
+                                    name="photo_id"
+                                    value="{{photo.id}}" />
+                                <input
+                                    name="comment_text"
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Please be a member to comment."
+                                    aria-describedby="sizing-addon3"
+                                disabled/>
+
+                            </form>
+
+
+                        </div>
+                                {% endif %}
+                        {% else %}
+                            <div class="input-group input-group-sm">
+
+                            {# Comment text box #}
+                            <form
+
+                                class="comment-form"
+                                style=" width:100%;"
+                            >
+                            {% csrf_token %}
+                                <input
+                                    type="hidden"
+                                    name="photo_id"
+                                    value="{{photo.id}}" />
+                                <input
+                                    name="comment_text"
+                                    type="text"
+                                    class="form-control"
+                                    disabled
+                                    placeholder="Please login to comment..."
+                                    aria-describedby="sizing-addon3" />
+
+                            </form>
+
+
+                        </div>
+                        {% endif %}
+
+                </div>
+
+            </div>
+        </div>
+
+
+            {% endfor %}
+        {% endif %}
+    </div>
+
+
+</div>
+
+        <script src="{% static "instaapp/js/photo-user-actions.js" %}"></script>
+
+{% endblock %}

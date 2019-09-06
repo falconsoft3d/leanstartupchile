@@ -1,0 +1,56 @@
+{% extends 'home_base.html' %}
+{% block headTitle %}
+    <title>Blog Page</title>
+{% endblock %}
+
+{% block loggedbody %}
+{% load static %}
+
+<div class="container mb60 mt50">
+	<div class="row">
+		<div class="col col-xl-8 m-auto col-lg-12 col-md-12 col-sm-12 col-12">
+			<div class="ui-block">
+
+
+				<!-- Single Post -->
+
+				<article class="hentry blog-post single-post single-post-v2">
+
+                    <h5 class="post-title">Update this Article</h5>
+                      <form method="post" enctype="multipart/form-data" >
+                          {% csrf_token %}
+                          {{ form.as_p }}
+                        <div style="margin-top:50px!important;">
+                          <button class="btn btn-secondary btn--half-width" onclick="window.location.reload();">Cancel</button>
+
+                          <button class="btn btn-blue btn--half-width" type="submit"> Update</button>
+                        </div>
+
+                      </form>
+
+
+
+				</article>
+
+				<!-- ... end Single Post -->
+
+			</div>
+
+
+		</div>
+
+		<div class="col col-xl-8 m-auto col-lg-12 col-md-12 col-sm-12  align-center">
+			<a href="{% url 'blogging:blogging' %}" class="btn btn-purple btn-md mb60 mt60">Go back ...</a>
+		</div>
+
+		<div class="col col-xl-8 m-auto col-lg-12 col-md-12 col-sm-12 col-12">
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+{% endblock %}

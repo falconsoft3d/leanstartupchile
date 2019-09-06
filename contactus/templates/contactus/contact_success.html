@@ -1,0 +1,19 @@
+{% extends "home_base.html" %}
+
+{% block headTitle %}Contact Us Success{% endblock %}
+
+{% block loggedbody %}
+<div class="container">
+
+    <div class="row">
+			<div class="col col-xl-6 col-lg-12 col-md-12 m-auto" >
+                        <h2 class="title">Thanks!</h2>
+
+                <p>We appreciate your feedback.<br />
+                Someone from the team will be in touch with you shortly.</p>
+
+                <div><a href="{% url 'home' %}">Home Page</a></div>
+            </div>
+        </div>
+</div>
+{% endblock %}

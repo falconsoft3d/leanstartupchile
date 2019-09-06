@@ -1,0 +1,64 @@
+{% extends 'home_base.html' %}
+{% block headTitle %}
+    <title>Blog Page</title>
+{% endblock %}
+
+{% block loggedbody %}
+{% load static %}
+
+<div class="container mb60 mt50">
+	<div class="row">
+		<div class="col col-xl-8 m-auto col-lg-12 col-md-12 col-sm-12 col-12">
+			<div class="ui-block">
+
+
+				<!-- Single Post -->
+
+				<article class="hentry blog-post single-post single-post-v2">
+                    <div class="single-post-additional inline-items">
+						<div class="post__author author vcard inline-items">
+                            <img src="{{ MEDIA_URL }}{{current_user.member.image.url}}" alt="author" class="avatar"/>
+
+							<div class="author-date not-uppercase">
+								<a class="h6 post__author-name fn" href="#">{{ current_user }}</a>
+								<div class="author_prof">
+									Author
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+                    <h2 class="h1 post-title">Create New Article</h2>
+                      <form method="post" enctype="multipart/form-data">
+                          {% csrf_token %}
+                          {{ form.as_p }}
+                          <input class="btn btn-primary btn-md" type="submit" value="Create" />
+                      </form>
+
+
+
+				</article>
+
+				<!-- ... end Single Post -->
+
+			</div>
+
+
+		</div>
+
+		<div class="col col-xl-8 m-auto col-lg-12 col-md-12 col-sm-12  align-center">
+			<a href="{% url 'blogging:blogging' %}" class="btn btn-purple btn-md mb60 mt60">Go back ...</a>
+		</div>
+
+		<div class="col col-xl-8 m-auto col-lg-12 col-md-12 col-sm-12 col-12">
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+{% endblock %}

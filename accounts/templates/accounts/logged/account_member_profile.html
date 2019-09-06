@@ -1,0 +1,58 @@
+{% extends 'accounts/account_account_base.html' %}
+
+{% load static %}
+
+
+{% block accountbody %}
+
+    <div class="col col-xl-9 order-xl-2 col-lg-9 order-lg-2 col-md-12 order-md-1 col-sm-12 col-12">
+			<div class="ui-block">
+				<div class="ui-block-title">
+					<h6 class="title">Member Settings</h6>
+				</div>
+				<div class="ui-block-content">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <!-- Member Settings Form  -->
+                        {% if user_dp %}
+                            <img src="{{ MEDIA_URL }}{{user_dp.image.url}}" alt="dp" class="img-thumbnail img-responsive">
+                        {% else %}
+                            <img src="{% static "instaapp/img/profile-picture-placeholder.png" %}" alt="dp" class="img-thumbnail img-responsive">
+                        {% endif %}
+
+                        <center><h5>{{user.username}} <small>{{user.first_name}} {{user.last_name}}</small></h5></center>
+                        <center><span>{{count}} posts</span> </center>
+
+                    </div>
+                    <div class="col-sm-8">
+
+                         <form id="uploadDp" action="{% url 'accounts:upload_member_profile' %}" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{dp_form}}
+                             <br><br><br>
+                            <button type="submit" class="btn btn-primary col-lg-12">
+                                Upload
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <hr>
+                    {% for photo in photos reversed%}
+                        <div class="col-sm-3">
+                            <img class="img-responsive img-rounded" src="{{ MEDIA_URL }}{{photo.image.url}}" alt="{{photo.caption}}" title="{{photo.caption}}"/>
+                        </div>
+                    {% endfor %}
+                </div>
+
+
+					<!-- ... end Personal Information Form  -->
+				</div>
+			</div>
+		</div>
+    <script src="{% static "instaapp/js/jquery.form.min.js" %}"></script>
+    <script src="{% static "instaapp/js/profile.js" %}"></script>
+
+{% endblock %}
+

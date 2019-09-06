@@ -1,0 +1,175 @@
+html, body {
+  /*color: #323133;*/
+}
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  font-family: sans-serif;
+}
+
+#content {
+  flex: 1;
+}
+
+footer {
+    height: 80px;
+    border-top: 1px solid #999;
+    background: #eee;
+    text-align: center;
+    padding-top: 25px;
+}
+
+a.navbar-brand {
+  height: 50px;
+  width: 200px;
+  display: inline-block;
+  background: transparent url('../img/logo.png') no-repeat 50% 50% / contain;
+}
+
+.panel.panel-post .panel-body {
+    padding: 0;
+}
+.panel.panel-post .panel-body img {
+    width: 100%;
+}
+
+
+.img-avatar {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.navbar,
+.navbar-collapse {
+  background-color: #fff;
+}
+
+.navbar {
+  border: none;
+}
+
+.panel-default .panel-heading {
+  color: #323133;
+  background-color: #F5F7FA;
+  border-color: #E6E9ED;
+}
+
+.panel-footer {
+    background-color: #F5F7FA;
+    border-top: 1px solid #E6E9ED;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.photo-comment {
+  margin-bottom: 0;
+}
+
+.like-button {
+  cursor: pointer;
+}
+
+.liked_photo {
+  fill: #ff5e3a;
+    color:#ff5e3a;
+}
+
+
+/*It is for sticky footer*/
+html,body{
+  height:100%!important;
+}
+body{
+  display:flex!important;
+  flex-direction:column!important;
+}
+.st_content{
+  flex:1 0 auto!important;
+}
+.footer{
+  flex-shrink:0!important;
+}
+
+
+/*------------- #Button create-blog --------------*/
+.create-blog {
+  position: fixed;
+  z-index: 19;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  display: block;
+  fill: #fff;
+  stroke: inherit;
+  transition: all .3s ease;
+  bottom: 10px;
+  right: 85px;
+  cursor: pointer;
+  box-shadow: 0 0 10px 0 rgba(63, 66, 87, 0.4);
+  border-radius: 100%;
+  background-color: #ff5e3a;
+  text-align: center; }
+  .create-blog.hidden {
+    opacity: 0; }
+  .create-blog .back-icon {
+    height: 20px;
+    width: 20px; }
+
+/*================= Responsive Mode ============*/
+@media (max-width: 768px) {
+  .create-blog {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    right: 10px; }
+    .create-blog .back-icon {
+      height: 15px;
+      width: 15px; } }
+
+
+
+
+
+/* good showing */
+/*------------- #NEWS-FEED-Masonry --------------*/
+.cat-list-bg-style {
+  margin: 50px 0;
+  padding: 0;
+  list-style: none; }
+  .cat-list-bg-style.static-list_item-bg-blue .static-list_item {
+    display: inline-block; }
+    .cat-list-bg-style.static-list_item-bg-blue .static-list_item a:hover {
+      background-color: #38a9ff; }
+    .cat-list-bg-style.static-list_item-bg-blue .static-list_item.active {
+      background-color: #38a9ff; }
+
+.static-list_item {
+  display: inline-block;
+  background-color: #dee4ec;
+  margin: 0 10px;
+  border-radius: 30px;
+  overflow: hidden; }
+  .static-list_item a {
+    font-size: 14px;
+    color: #888da8;
+    position: relative;
+    text-transform: capitalize;
+    transition: all .3s ease;
+    padding: 10px 20px;
+    display: block; }
+    .static-list_item a:hover {
+      color: #fff;
+      background-color: #ff5e3a; }
+  .static-list_item.active {
+    background-color: #ff5e3a; }
+    .static-list_item.active a {
+      color: #fff; }
+
+/*================= Responsive Mode ============*/
+@media (max-width: 768px) {
+  .cat-list-bg-style {
+    margin: 30px 0; }
+  .cat-list-bg-style.static-list_item-bg-blue .static-list_item {
+    display: block;
+    margin-top: 10px; } }

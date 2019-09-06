@@ -1,0 +1,42 @@
+{% extends 'home_base.html' %}
+{% block headTitle %}
+	<title>Logged Out</title>
+{% endblock %}
+
+{% block bodyTagWithClass %}
+    <body>
+{% endblock %}
+
+
+{% block loggedbody %}
+
+{% load static %}
+
+<section class="medium-padding120">
+	<div class="container">
+		<div class="row">
+			<div class="col col-xl-4 col-lg-12 col-md-12 m-auto">
+				<div class="logout-content">
+
+					<p><a href="{% url 'accounts:login' %}">Login</a> or <a href="{% url 'accounts:login' %}">Register</a> now to create your own profile
+						and have access to this site!
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+{% endblock %}
+	
+
+
+
+
+
+
+
+
+

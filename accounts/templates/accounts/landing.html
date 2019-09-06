@@ -1,0 +1,69 @@
+{% extends 'home_base.html' %}
+{% block headTitle %}
+	<title>Log In|Sign Up Page</title>
+{% endblock %}
+
+{% block bodyTagWithClass %}
+    <body>
+{% endblock %}
+
+{% block loggedbody %}
+
+{% load static %}
+    <div class="container">
+	<div class="row display-flex">
+		<div class="col col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+
+		</div>
+
+		<div class="col col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+
+			<!-- Login-Registration Form  -->
+
+			<div class="registration-login-form">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" data-toggle="tab" href="#home" role="tab">
+							<svg class="olymp-login-icon"><use xlink:href="{% static 'svg-icons/sprites/icons.svg' %}#olymp-login-icon"></use></svg>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" data-toggle="tab" href="#profile" role="tab">
+							<svg class="olymp-register-icon"><use xlink:href="{% static 'svg-icons/sprites/icons.svg' %}#olymp-register-icon"></use></svg>
+						</a>
+					</li>
+				</ul>
+
+				<!-- Tab panes -->
+				<div class="tab-content">
+					<div class="tab-pane active" id="home" role="tabpanel" data-mh="log-tab">
+						<div class="title h6">Login to your Account</div>
+						<form class="content" action="{% url 'accounts:login' %}" method="post">
+							{% csrf_token %}
+							{% include 'forms/bs4_loginform.html' with form=form %}
+						</form>
+					</div>
+
+					<div class="tab-pane" id="profile" role="tabpanel" data-mh="log-tab">
+
+                        <div class="title h6">Register to Olympus</div>
+						<form class="content" action = "{% url 'accounts:register' %}" method = "POST">
+						    {% csrf_token %}
+
+                            {% include 'forms/bs4_registerform.html' with form=register_form %}
+
+						</form>
+
+					</div>
+				</div>
+			</div>
+
+			<!-- ... end Login-Registration Form  -->		</div>
+        <div class="col col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+
+		</div>
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% load label_tag_attr %}
+{% load widget_tweaks %}
+<div class="row">
+    <div class="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
+{% for hidden_field in form.hidden_fields %}
+  {{ hidden_field }}
+{% endfor %}
+{% if form.non_field_errors %}
+  <div class="alert alert-danger" role="alert">
+    {% for error in form.non_field_errors %}
+      {{ error }}
+    {% endfor %}
+  </div>
+{% endif %}
+{% for field in form.visible_fields %}
+
+        <div class="form-group label-floating">
+
+            {% render_label field class="control-label" %}
+            {% if form.is_bound %}
+              {% if field.errors %}
+                {% render_field field class="form-control is-invalid" placeholder="" %}
+                {% for error in field.errors %}
+                  <div class="invalid-feedback">
+                    {{ error }}
+                  </div>
+                {% endfor %}
+              {% else %}
+                {% render_field field class="form-control is-valid" placeholder="" %}
+              {% endif %}
+            {% else %}
+              {% render_field field class="form-control" placeholder="" %}
+            {% endif %}
+
+            {% if field.help_text %}
+              <small class="form-text text-muted">{{ field.help_text }}</small>
+            {% endif %}
+        </div>
+
+
+{% endfor %}
+            <div class="remember">
+
+                <div class="checkbox">
+                    <label>
+                        <input name="optionsCheckboxes" type="checkbox">
+                        Remember Me
+                    </label>
+                </div>
+                <a href="{% url 'accounts:reset_password' %}" class="forgot">Forgot my Password</a>
+            </div>
+
+
+            <button class="btn btn-lg btn-primary full-width" type="submit">Login</button>
+
+            <div class="or"></div>
+
+            <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-lg bg-facebook full-width btn-icon-left"><i class="fab fa-facebook-f" aria-hidden="true"></i>Login with Facebook</a>
+
+
+
+            <p>Don’t you have an account? <a href="#">Register Now!</a> it’s really simple and you can start enjoing all the benefits!</p>
+ </div>
+ </div>
+

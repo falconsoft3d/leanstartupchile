@@ -1,0 +1,29 @@
+{% extends 'home_base.html' %}
+{% block headTitle %}
+    <title>Home Page</title>
+{% endblock %}
+
+{% block loggedbody %}
+{% load static %}
+<div id="content" class="container">
+    <div class="row">
+    <div class="col-md-3 col-xs-0"></div>
+    <div class="col-md-6 col-xs-12" style="background-color: #ffffff;padding:20px; border-radius:5px;">
+        <h3>Edit Photo</h3>
+            <div class="post-thumb">
+                    <img src="{{ MEDIA_URL }}{{image.url}}" alt="post" />
+
+                </div>
+        <form action="" method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button class="btn btn-primary btn-md-2" type="submit" >Edit</button>
+            <a href="{% url 'accounts:myfeed' %}" class="btn btn-primary btn-md-2"  style="float:right;">Cancel</a>
+        </form>
+    </div>
+    <div class="col-md-3 col-xs-0"></div>
+    </div>
+</div>
+
+
+{% endblock %}

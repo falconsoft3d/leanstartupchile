@@ -1,0 +1,354 @@
+{% extends 'base_olympus.html' %}
+{% block headTitle %}
+	<title>Profile Page</title>
+{% endblock %}
+
+{% block bodyTagWithClass %}
+<body>
+{% endblock %}
+
+
+{% block body %}
+<div class="st_content">
+{% load static %}
+
+{% block sidebar %}
+    {% if user.is_authenticated %}
+<!-- Fixed Sidebar Left -->
+
+<div class="fixed-sidebar">
+	<div class="fixed-sidebar-left sidebar--small" id="sidebar-left" style="background-color:transparent!important; box-shadow:0 0 0 0!important;">
+
+		<a  href="{% url 'home' %}" class="logo" style="width:120px!important;">
+			<div class="img-wrap">
+				<img src="{% static 'img/logo_v2.png' %}" alt="Olympus">
+			</div>
+		</a>
+
+
+	</div>
+
+</div>
+
+<!-- ... end Fixed Sidebar Left -->
+
+
+<!-- Fixed Sidebar Left -->
+
+<div class="fixed-sidebar fixed-sidebar-responsive">
+
+	<div class="fixed-sidebar-left sidebar--small" id="sidebar-left" style="background-color:transparent!important; box-shadow:0 0 0 0!important;">
+
+		<a href="{% url 'home' %}" class="logo" style="width:120px!important;">
+			<div class="img-wrap">
+				<img src="{% static 'img/logo_v2.png' %}" alt="Olympus">
+			</div>
+		</a>
+
+
+	</div>
+
+</div>
+
+<!-- ... end Fixed Sidebar Left -->
+    <!-- Fixed Sidebar Right -->
+
+<div class="fixed-sidebar right">
+	<div class="fixed-sidebar-right sidebar--small" id="sidebar-right" style="border-left:0!important;background-color:transparent!important; box-shadow:0 0 0 0!important;">
+
+	</div>
+
+</div>
+
+<!-- ... end Fixed Sidebar Right -->
+
+
+<!-- Fixed Sidebar Right-Responsive -->
+
+<div class="fixed-sidebar right fixed-sidebar-responsive">
+
+	<div class="fixed-sidebar-right sidebar--small" id="sidebar-right" style="border-left:0!important;background-color:transparent!important; box-shadow:0 0 0 0!important;">
+
+	</div>
+
+</div>
+
+<!-- ... end Fixed Sidebar Right-Responsive -->
+    {% endif %}
+{% endblock %}
+
+
+{% block header %}
+    {% if user.is_authenticated %}
+<!-- Header-BP -->
+
+<header class="header" id="site-header">
+
+	<div class="page-title">
+
+	</div>
+
+	<div class="header-content-wrapper">
+
+
+		<div class="control-block">
+
+            <div class="form--login-logout">
+
+                <form class="form-inline" action="" method="post">
+                    <a href="{% url 'home' %}" class="btn btn-purple btn-md-2 " >Home</a>
+                    <a href="{% url 'blogging:blogging' %}" class="btn btn-purple btn-md-2 " >Blog</a>
+                    <a href="{% url 'contact:contactus' %}" class="btn btn-purple btn-md-2 " >Contact Us</a>
+                    <div class="author-page author vcard inline-items more">
+				<div class="author-thumb">
+                    {% if current_user.member.image.url %}
+                            <img
+                                src="{{ MEDIA_URL }}{{current_user.member.image.url}}"
+                                alt="author"
+                                class="img-avatar">
+                        {% else %}
+                            <img
+                                src="{% static "instaapp/img/profile-picture-placeholder.png" %}"
+                                alt="dp"
+                                class="img-avatar">
+                        {% endif %}
+					<span class="icon-status online"></span>
+
+					<div class="more-dropdown more-with-triangle">
+						<div class="mCustomScrollbar" data-mcs-theme="dark">
+							<div class="ui-block-title ui-block-title-small">
+								<h6 class="title">Your Account</h6>
+							</div>
+
+							<ul class="account-settings">
+                                <li>
+									<a href="{% url 'home' %}">
+										<svg class="olymp-menu-icon"><use xlink:href="{% static 'svg-icons/sprites/icons.svg' %}#olymp-menu-icon"></use></svg>
+
+										<span>Home page</span>
+									</a>
+								</li>
+								<li>
+									<a href="{% url 'accounts:view_profile' %}">
+
+						                <svg class="olymp-happy-face-icon"><use xlink:href="{% static 'svg-icons/sprites/icons.svg' %}#olymp-happy-face-icon"></use></svg>
+
+										<span>Profile Settings</span>
+									</a>
+								</li>
+
+                                <li>
+                                    <a href="{% url 'accounts:upload_photo' %}">
+						                    <svg class="olymp-badge-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="Community Badges"><use xlink:href="{% static 'svg-icons/sprites/icons.svg' %}#olymp-badge-icon"></use></svg>
+
+                                            <span>Upload Photo</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'accounts:myfeed' %}">
+						                    <svg class="olymp-star-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="FAV PAGE"><use xlink:href="{% static 'svg-icons/sprites/icons.svg' %}#olymp-star-icon"></use></svg>
+
+                                            <span>My Posts</span>
+                                    </a>
+                                </li>
+
+								<li>
+									<a href="{% url 'accounts:logout' %}">
+										<svg class="olymp-logout-icon"><use xlink:href="{% static 'svg-icons/sprites/icons.svg' %}#olymp-logout-icon"></use></svg>
+
+										<span>Log Out</span>
+									</a>
+								</li>
+
+							</ul>
+
+						</div>
+
+					</div>
+				</div>
+				<a href="#" class="author-name fn">
+					<div class="author-title">
+						{{current_user.username}} <svg class="olymp-dropdown-arrow-icon"><use xlink:href="{% static 'svg-icons/sprites/icons.svg' %}#olymp-dropdown-arrow-icon"></use></svg>
+					</div>
+
+				</a>
+			</div>
+                </form>
+
+		    </div>
+
+
+		</div>
+	</div>
+
+</header>
+
+<!-- ... end Header-BP -->
+
+
+<!-- Responsive Header-BP -->
+
+<header class="header header-responsive" id="site-header-responsive">
+    <div class="header-content-wrapper row" >
+
+        <div class="col-xs-8"></div>
+		<div class="control-block">
+
+
+			<div class="author-page author vcard inline-items more">
+				<div class="author-thumb">
+                    {% if current_user.member.image.url %}
+                            <img
+                                src="{{ MEDIA_URL }}{{current_user.member.image.url}}"
+                                alt="author"
+                                class="img-avatar">
+                        {% else %}
+                            <img
+                                src="{% static "instaapp/img/profile-picture-placeholder.png" %}"
+                                alt="dp"
+                                class="img-avatar">
+                        {% endif %}
+					<span class="icon-status online"></span>
+
+					<div class="more-dropdown more-with-triangle" style="right:-100px!important;">
+						<div class="mCustomScrollbar" data-mcs-theme="dark">
+							<div class="ui-block-title ui-block-title-small">
+								<h6 class="title">Your Account</h6>
+							</div>
+
+							<ul class="account-settings">
+                                <li>
+									<a href="{% url 'home' %}">
+										<svg class="olymp-menu-icon"><use xlink:href="{% static 'svg-icons/sprites/icons.svg' %}#olymp-menu-icon"></use></svg>
+
+										<span>Home page</span>
+									</a>
+								</li>
+								<li>
+									<a href="{% url 'accounts:view_profile' %}">
+
+						                <svg class="olymp-happy-face-icon"><use xlink:href="{% static 'svg-icons/sprites/icons.svg' %}#olymp-happy-face-icon"></use></svg>
+
+										<span>Profile Settings</span>
+									</a>
+								</li>
+
+                                <li>
+                                    <a href="{% url 'accounts:upload_photo' %}">
+						                    <svg class="olymp-badge-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="Community Badges"><use xlink:href="{% static 'svg-icons/sprites/icons.svg' %}#olymp-badge-icon"></use></svg>
+
+                                            <span>Upload Photo</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'accounts:myfeed' %}">
+						                    <svg class="olymp-star-icon left-menu-icon"  data-toggle="tooltip" data-placement="right"   data-original-title="FAV PAGE"><use xlink:href="{% static 'svg-icons/sprites/icons.svg' %}#olymp-star-icon"></use></svg>
+
+                                            <span>My Posts</span>
+                                    </a>
+                                </li>
+
+								<li>
+									<a href="{% url 'accounts:logout' %}">
+										<svg class="olymp-logout-icon"><use xlink:href="{% static 'svg-icons/sprites/icons.svg' %}#olymp-logout-icon"></use></svg>
+
+										<span>Log Out</span>
+									</a>
+								</li>
+
+							</ul>
+
+						</div>
+
+					</div>
+				</div>
+				<a href="#" class="author-name fn">
+					<div class="author-title" style="color: white!important;">
+						{{current_user.username}} <svg class="olymp-dropdown-arrow-icon"><use xlink:href="{% static 'svg-icons/sprites/icons.svg' %}#olymp-dropdown-arrow-icon"></use></svg>
+					</div>
+
+				</a>
+			</div>
+
+		</div>
+	</div>
+
+</header>
+
+<!-- ... end Responsive Header-BP -->
+
+
+    {% else %}
+        <!-- for not-authenticated users only -->
+    <!-- Header-BP-logout -->
+
+<header class="header header--logout" id="site-header">
+	<a href="{% url 'home' %}" class="logo" style = "width:140px!important;">
+		<div class="img-wrap">
+			<img src="{% static 'img/logo_v2.png' %}" alt="Olympus">
+		</div>
+	</a>
+
+	<div class="page-title" style="width:300px!important;">
+		<h6>Lean Startup Chile</h6>
+	</div>
+
+	<div class="header-content-wrapper">
+
+
+		<div class="form--login-logout">
+
+			<form class="form-inline" action="" method="post">
+                <a href="{% url 'home' %}" class="btn btn-purple btn-md-2 " >Home</a>
+                <a href="{% url 'blogging:blogging' %}" class="btn btn-purple btn-md-2 " >Blog</a>
+                <a href="{% url 'contact:contactus' %}" class="btn btn-purple btn-md-2 " >Contact Us</a>
+                <a href="{% url 'accounts:login' %}" class="btn btn-primary btn-md-2 " >Login</a>
+            </form>
+		</div>
+	</div>
+
+</header>
+
+<!-- ... end Header-BP-logout -->
+
+
+    {% endif %}
+
+{% endblock %}
+
+{% block header-spacer %}
+<div class="header-spacer"></div>
+{% endblock %}
+
+{% block loggedbody %}
+
+
+{% endblock %}
+
+
+<a class="back-to-top" href="#">
+	<img src="{% static 'svg-icons/back-to-top.svg' %}" alt="arrow" class="back-icon">
+</a>
+    </div>
+
+<div class="footer footer--dark" id="footer" style="padding:0!important;width:100%!important;">
+	<div class="container">
+		<div class="row">
+			<div class="col col-lg-12 col-md-12 col-sm-12 col-12">
+
+
+				<!-- SUB Footer -->
+
+				<div class="sub-footer-copyright" style="padding:20px 0!important;margin:0!important;border-top: 0 !important;">
+					<span>
+						Copyright <a href="{% url 'home' %}">Lean Start Up Chile</a> All Rights Reserved 2018
+					</span>
+				</div>
+
+				<!-- ... end SUB Footer -->
+
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

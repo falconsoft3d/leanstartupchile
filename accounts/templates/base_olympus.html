@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% block headTitle %}
+	<title>Landing Page</title>
+    {% endblock %}
+	<!-- Required meta tags always come first -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+
+	<!-- Main Font -->
+	{% load static %}
+	<script src="{% static 'js/webfontloader.min.js' %}"></script>
+
+	<script>
+		WebFont.load({
+			google: {
+				families: ['Roboto:300,400,500,700:latin']
+			}
+		});
+	</script>
+
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" type="text/css" href="{% static 'Bootstrap/dist/css/bootstrap-reboot.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'Bootstrap/dist/css/bootstrap.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'Bootstrap/dist/css/bootstrap-grid.css' %}">
+
+	<!-- Main Styles CSS -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/fonts.min.css' %}">
+
+    <link rel="stylesheet" href="{% static "instaapp/css/style.css" %}">
+    <script src="{% static 'js/jquery-3.2.1.js' %}"></script>
+    <script src="{% static "instaapp/js/js.cookie.js" %}"></script>
+    <script src="{% static "instaapp/js/scripts.js" %}"></script>
+
+
+</head>
+{% block bodyTagWithClass %}
+<body class="landing-page">
+{% endblock %}
+
+{% block body %}
+
+
+{% endblock %}
+
+<!-- JS Scripts -->
+{% block pagescript %}
+
+
+<script src="{% static 'js/jquery.appear.js' %}"></script>
+<script src="{% static 'js/jquery.mousewheel.js' %}"></script>
+<script src="{% static 'js/perfect-scrollbar.js' %}"></script>
+<script src="{% static 'js/jquery.matchHeight.js' %}"></script>
+<script src="{% static 'js/svgxuse.js' %}"></script>
+<script src="{% static 'js/imagesloaded.pkgd.js' %}"></script>
+<script src="{% static 'js/Headroom.js' %}"></script>
+<script src="{% static 'js/velocity.js' %}"></script>
+<script src="{% static 'js/ScrollMagic.js' %}"></script>
+<script src="{% static 'js/jquery.waypoints.js' %}"></script>
+<script src="{% static 'js/jquery.countTo.js' %}"></script>
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/material.min.js' %}"></script>
+<script src="{% static 'js/bootstrap-select.js' %}"></script>
+<script src="{% static 'js/smooth-scroll.js' %}"></script>
+<script src="{% static 'js/selectize.js' %}"></script>
+<script src="{% static 'js/swiper.jquery.js' %}"></script>
+<script src="{% static 'js/moment.js' %}"></script>
+<script src="{% static 'js/daterangepicker.js' %}"></script>
+<script src="{% static 'js/simplecalendar.js' %}"></script>
+<script src="{% static 'js/fullcalendar.js' %}"></script>
+<script src="{% static 'js/isotope.pkgd.js' %}"></script>
+<script src="{% static 'js/ajax-pagination.js' %}"></script>
+<script src="{% static 'js/Chart.js' %}"></script>
+<script src="{% static 'js/chartjs-plugin-deferred.js' %}"></script>
+<script src="{% static 'js/circle-progress.js' %}"></script>
+<script src="{% static 'js/loader.js' %}"></script>
+<script src="{% static 'js/run-chart.js' %}"></script>
+<script src="{% static 'js/jquery.magnific-popup.js' %}"></script>
+<script src="{% static 'js/jquery.gifplayer.js' %}"></script>
+<script src="{% static 'js/mediaelement-and-player.js' %}"></script>
+<script src="{% static 'js/mediaelement-playlist-plugin.min.js' %}"></script>
+
+<script src="{% static 'js/base-init.js' %}"></script>
+<script defer src="{% static 'fonts/fontawesome-all.js' %}"></script>
+
+<script src="{% static 'Bootstrap/dist/js/bootstrap.bundle.js' %}"></script>
+
+
+
+
+{% endblock %}
+</body>
+</html>
